@@ -1,7 +1,9 @@
 import tmi from "tmi.js"
-import {BOT_USERNAME , OAUTH_TOKEN, CHANNEL_NAME, BLOCKED_WORDS, pedro_count } from "./constants"
+import {BOT_USERNAME , OAUTH_TOKEN, CHANNEL_NAME, API_RIOT_KEY, ID_GA} from "./constants"
 
 const fetch = require('node-fetch');
+
+
 
 
 const options = {
@@ -200,6 +202,25 @@ client.on('message', (channel, userstate, message, self) => {
 		pedro();
 		client.say(channel, `/me` + ` Gabs matou o Pedro ${c} vezes!!`)
 	}
+
+	if(message.toLowerCase() === "!elo"){
+		const url = `https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${ID_GA}?api_key=${API_RIOT_KEY}`
+		fetch(url)
+		.then(response => response.json())
+		.then(elo =>{
+			// JSON.stringify(elo);
+			let tierRaw = elo[0].tier;
+			let rank = elo[0].rank;
+			let lp = elo[0].leaguePoints;
+			client.say(channel, `/me ` + `——————————————————————— gabsbmBalinhaneles olha proclin.....................${tierRaw} ${rank} (${lp} PDL) ———————————————————————`)
+
+			
+		})
+	}
+
+		
+
+	
     checkTwitchChat (userstate, message, channel) 
 });
 
