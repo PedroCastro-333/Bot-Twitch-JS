@@ -208,11 +208,42 @@ client.on('message', (channel, userstate, message, self) => {
 		fetch(url)
 		.then(response => response.json())
 		.then(elo =>{
-			// JSON.stringify(elo);
-			let tierRaw = elo[0].tier;
-			let rank = elo[0].rank;
-			let lp = elo[0].leaguePoints;
-			client.say(channel, `/me ` + `——————————————————————— gabsbmBalinhaneles olha proclin.....................${tierRaw} ${rank} (${lp} PDL) ———————————————————————`)
+			JSON.stringify(elo);
+			let tierRaw = elo[1].tier;
+			let rank = elo[1].rank;
+			let lp = elo[1].leaguePoints;
+			switch (tierRaw){
+				case "IRON":
+					var	tier = 'FERRO'
+					break;
+				case "BRONZE":
+					var tier = 'BRONZE'
+					break;
+				case "SILVER":
+					tier = 'PRATA'
+					break;
+				case "GOLD":
+					var tier = 'OURO'
+					break;
+				case "PLATINUM":
+					var tier = 'PLATINA'
+					break;
+				case "DIAMOND":
+					var tier = 'DIAMANTE'
+					break;
+				case "MASTER":
+					var tier = 'MESTRE'
+					break;
+				case "GRANDMASTER":
+					var tier = 'GRÃO-MESTRE'
+					break;
+				default:
+					var tier = "CHALLENGER"
+					break;
+			}
+			let tierFinal = tier
+
+			client.say(channel, `/me ` + `——————————————————————— gabsbmBalinhaneles olha proclin.....................${tierFinal} ${rank} (${lp} PDL) ———————————————————————`)
 
 			
 		})
